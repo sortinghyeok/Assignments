@@ -1,0 +1,163 @@
+create or replace trigger addPoint
+    AFTER insert or update of SCORE, EVALUATION on PURCHASE_LIST
+    FOR EACH ROW
+    BEGIN  
+        if :new.score is not null and :new.evaluation is not null
+        THEN
+        update CUSTOMER C
+        set C.point = C.point+1
+        where C.CUSTOMER_ID = :new.CUSTOMER_ID;
+        END IF;
+    END;
+
+insert into genre values ('Finance', 'Society', null, null);
+insert into genre values ('Society', 'Finance', 'Culture', 'History');
+insert into genre values ('Culture', 'History', 'Art', 'Game');
+insert into genre values ('History', 'Culture', 'Society', null);
+insert into genre values ('Art', 'Game', 'Culture', null);
+insert into genre values ('Game', 'Culture', 'Art', null);
+insert into genre values ('Biology', null, null, null);
+
+insert into writer values ('John');
+insert into writer values ('Jake'); 
+insert into writer values ('Song');
+insert into writer values ('Jennie');
+insert into writer values ('Park');
+insert into writer values ('Marry');
+insert into writer values ('Tom');
+insert into writer values ('Komi');
+insert into writer values ('Sam');
+insert into writer values ('Jim');
+
+
+insert into PUBLICATION VALUES ('1111', '17/11/11');
+insert into PUBLICATION VALUES ('2222', '17/11/12');
+insert into PUBLICATION VALUES ('3333', '17/11/13');
+insert into PUBLICATION VALUES ('4444', '17/11/14');
+insert into PUBLICATION VALUES ('5555', '17/11/15');
+insert into PUBLICATION VALUES ('6666', '17/11/16');
+insert into PUBLICATION VALUES ('7777', '17/11/17');
+insert into PUBLICATION VALUES ('8888', '17/11/18');
+insert into PUBLICATION VALUES ('9999', '17/11/19');
+insert into PUBLICATION VALUES ('0000', '17/11/20');
+insert into PUBLICATION VALUES ('1112', '17/11/21');
+insert into PUBLICATION VALUES ('1113', '17/11/22');
+insert into PUBLICATION VALUES ('1114', '17/11/23');
+insert into PUBLICATION VALUES ('1115', '17/11/24');
+insert into PUBLICATION VALUES ('1116', '17/11/25');
+insert into PUBLICATION VALUES ('1117', '17/11/26');
+insert into PUBLICATION VALUES ('1118', '17/11/27');
+insert into PUBLICATION VALUES ('1119', '17/11/28');
+insert into PUBLICATION VALUES ('1110', '17/11/29');
+insert into PUBLICATION VALUES ('2221', '17/11/30');
+
+insert into publisher values ('Hi', 'Yong1', '0321112221', '17/11/11');
+insert into publisher values ('Hanbit', 'Yong2', '0321112223', '17/11/12');
+insert into publisher values ('Daewon', 'Yong3', '0321112222', '17/11/13');
+insert into publisher values ('Holly', 'Yong4', '0321112224', '17/11/14');
+insert into publisher values ('Dongam', 'Yong5', '0321112225', '17/11/15');
+insert into publisher values ('Watson', 'Yong6', '0321112226', '17/11/16');
+insert into publisher values ('Hello', 'GangNam', '0311112222', '17/11/17');
+insert into publisher values ('Ubi', 'GangNam2', '0311112223', '17/11/18');
+insert into publisher values ('Simons', 'GangNam', '0311112224', '17/11/19');
+insert into publisher values ('Samyang', 'GangNam2', '0311112225', '17/11/20');
+insert into publisher values ('Lemon', 'GangNam', '0311112226', '17/11/21');
+insert into publisher values ('Chicken', 'PanGyo', '0311112227', '17/11/22');
+insert into publisher values ('Sugar', 'PanGyo2', '0311112228', '17/11/23');
+insert into publisher values ('Theme', 'PanGyo', '0311112229', '17/11/24');
+insert into publisher values ('Biden', 'PanGyo2', '0311112230', '17/11/25');
+insert into publisher values ('Trump', 'PanGyo', '0311112231', '17/11/26');
+insert into publisher values ('Abe', 'PanGyo', '0311112232', '17/11/27');
+insert into publisher values ('Money', 'GangBuk', '0311112233', '17/11/28');
+insert into publisher values ('Pet', 'GangBuk', '0311112234', '17/11/29');
+insert into publisher values ('Tail', 'GangBuk', '0311112235', '17/11/30');
+//모든 unique publication date에 대하여 출판사를 대응해주기로 결정.
+
+insert into book VALUES ('Koreans', '1111', 'Hi', 'John', '10000', '100', 'Culture', '3');
+insert into book VALUES ('Japanese', '2222', 'Hanbit', 'Jake', '12000', '100', 'Culture', '3');
+insert into book VALUES ('SeoulNow', '3333', 'Daewon', 'Song', '15000' , '120', 'Society', '3');
+insert into book VALUES ('ArtToday', '4444', 'Holly', 'Jennie', '2000', '40', 'Art', '2');
+insert into book VALUES ('Starcraft', '5555', 'Dongam', 'Park', '8000', '80', 'Game', '2');
+insert into book VALUES ('Bitcoin', '6666', 'Watson', 'Marry', '4000', '30', 'Finance', '2');
+insert into book VALUES ('Evolution', '7777', 'Hello', 'Tom', '19000', '55', 'Biology', '2');
+insert into book VALUES ('TheRome', '8888', 'Ubi', 'Komi', '5000', '111', 'History', '2');
+insert into book VALUES ('Hobby', '9999', 'Simons', 'Sam', '1500', '122',  'Culture', '1');
+insert into book VALUES ('Kimchi', '0000', 'Samyang', 'Jim', '5000', '333', 'Culture', '1');
+insert into book VALUES ('TheFuture', '1112', 'Lemon', 'Jim', '25000', '200', 'Society', '1');
+insert into book VALUES ('ThePast', '1113', 'Chicken', 'Jake', '20000', '300', 'History', '1');
+insert into book VALUES ('Hope', '1114', 'Sugar', 'Song', '4500', '150', 'History', '1');
+insert into book VALUES ('Mount', '1115', 'Theme', 'Park', '16000', '120', 'Finance', '1');
+insert into book VALUES ('Racists', '1116', 'Biden', 'Komi', '40000', '300', 'Society', '1');
+insert into book VALUES ('PC', '1117', 'Trump', 'Tom', '15000', '280', 'Society', '1');
+insert into book VALUES ('Politics', '1118', 'Abe', 'Jake', '12000', '122', 'Society', '1');
+insert into book VALUES ('Warcraft', '1119', 'Money', 'Marry', '14000', '200', 'Game', '1');
+insert into book VALUES ('Cheating', '1110', 'Pet', 'Song', '10000', '110', 'Art', '1');
+insert into book VALUES ('FakeArts', '2221', 'Tail', 'Park', '1000', '140', 'Art', '1');
+//대표 저자만 입력. 질의시 공저자가 같이 나오게 할 것
+//null인 것들은 작자 미상이다. 작가가 7명이고, 2인 공저자 5건과 3인 공저자 3건으로는 20권의 책에 모두 작가를
+나머지는 1인 저자
+
+insert into customer values ('James', '12345', 'Mapo', '01011111111', '0');
+insert into customer values ('Tes', '14235', 'Mapo', '01044443233', '0');
+insert into customer values ('Ninav', '62142', 'Mapo', '01055551111', '0');
+insert into customer values ('Sumin', '12342', 'Sondo', '01055671234', '0');
+insert into customer values ('Jiho', '55532', 'Sondo', '01055567788', '0');
+insert into customer values ('Teshi', '63421', 'Sondo', '01055123361'. '0');
+insert into customer values ('Hiroshi', '26732', 'Sondo', '01044422111'. '0');
+insert into customer values ('Xi', '25332', 'GangNam', '01163121112', '0');
+insert into customer values ('Obama', '66773', 'PanGyo', '01266771112', '0');
+insert into customer values ('Lee', '77777', 'Dongam', '01066173321', '0');
+
+insert into purchase_list values ('12345', '1', 'BAD', '1111');
+insert into purchase_list values ('14235', '3', 'SOSO', '2222');
+insert into purchase_list values ('62142', '4', 'GOOD', '3333');
+insert into purchase_list values ('26732', '4', 'GOOD', '9999');
+insert into purchase_list values ('25332', '4', 'GOOD', '9999');
+insert into purchase_list values ('66773', '5',  'GREAT', '2221');
+insert into purchase_list values ('77777', '4', 'GOOD', '1110');
+insert into purchase_list values ('12345', '2', 'BAD', '2222');
+insert into purchase_list values ('12345', '2', 'BAD', '1111');
+insert into purchase_list values  ('25332', '4', 'GOOD', '3333');
+insert into purchase_list values ('12342', '5',  'GREAT', '4444');
+insert into purchase_list values ('62142', '4', 'GOOD', '5555');
+insert into purchase_list values ('62142', '4', 'GOOD', '9999');
+insert into purchase_list values ('12342', '5',  'GREAT', '1110');
+insert into purchase_list values ('66773', '5',  'GREAT', '2221');
+insert into purchase_list values ('14235', '3', 'SOSO', '8888');
+insert into purchase_list values ('14235', '2', 'BAD', '7777');
+insert into purchase_list values ('26732', '0', 'TERRIBLE', '2222');
+insert into purchase_list values ('25332', '4', 'GOOD', '1111');
+insert into purchase_list values ('26732', '5', 'INSANE', '2222');
+
+insert into enrolled_list values('1111', 'John', 'Jake', 'Jennie');
+insert into enrolled_list values('1111', 'Jake', 'Jake', 'John');
+insert into enrolled_list values('1111', 'Jennie', 'Jake', 'John');
+insert into enrolled_list values('2222', 'Jake', 'Song', 'Park');
+insert into enrolled_list values('2222', 'Song', 'Jake', 'Park');
+insert into enrolled_list values('2222', 'Park', 'Song', 'Jake');
+insert into enrolled_list values('3333', 'Song', 'Jim', 'Komi');
+insert into enrolled_list values('3333', 'Jim', 'Song', 'Komi');
+insert into enrolled_list values('3333', 'Komi', 'Song', 'Jim');
+insert into enrolled_list values('4444', 'Jennie', 'Park', null);
+insert into enrolled_list values('4444', 'Park', 'Jennie', null);
+insert into enrolled_list values('5555', 'Park', 'Song', null);
+insert into enrolled_list values('5555', 'Song', 'Park', null);
+insert into enrolled_list values('6666', 'Marry',  'Park', null);
+insert into enrolled_list values('6666', 'Park', 'Marry', null);
+insert into enrolled_list values('7777', 'Tom', 'Park', null);
+insert into enrolled_list values('7777', 'Park', 'Tom', null);
+insert into enrolled_list values('8888', 'Komi', 'John', null);
+insert into enrolled_list values('8888', 'John', 'Komi', null);
+insert into enrolled_list values('9999', 'Sam',null,null);
+insert into enrolled_list values('0000', 'Jim',null,null);
+insert into enrolled_list values('1112', 'Jim',null,null);
+insert into enrolled_list values('1113', 'Jake', null,null);
+insert into enrolled_list values('1114', 'Song',null,null);
+insert into enrolled_list values('1115', 'Park',null,null);
+insert into enrolled_list values('1116', 'Komi',null,null);
+insert into enrolled_list values('1117', 'Tom',null,null);
+insert into enrolled_list values('1118', 'Jake',null,null);
+insert into enrolled_list values('1119', 'Marry',null,null);
+insert into enrolled_list values('1110', 'Song',null,null);
+insert into enrolled_list values('2221', 'Park',null,null');
+

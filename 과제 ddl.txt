@@ -1,0 +1,75 @@
+create table genre(
+    genre_name VARCHAR(10),
+    relative_genre1 VARCHAR(10),
+    relative_genre2 VARCHAR(10),
+    relative_genre3 VARCHAR(10),
+    primary key (genre_name)
+);
+
+create table publication
+(
+    ISBN VARCHAR(10),
+    publication_date VARCHAR(15) UNIQUE,
+    primary key(ISBN),
+);
+
+create table writer(
+    writer_name varchar(10),
+    primary key (writer_name),
+    FOREIGN KEY (ISBN) REFERENCES publication(ISBN)
+);
+
+create table publisher
+(
+    firm_name VARCHAR(15),
+    firm_address VARCHAR(10),
+    firm_contact VARCHAR(10),
+    publication_date VARCHAR(15),
+    PRIMARY KEY (firm_name),
+    FOREIGN KEY (publication_date) REFERENCES publication(publication_date)
+);
+//두 가지 선택지. publication value를 출판 정보에서 가져오는 foreign key로 하느냐, 아니면 대다수의 책을 몇 개의 publication date에 종속되게 하느냐
+
+create table book
+(
+    book_name VARCHAR(10),
+    ISBN VARCHAR(10),
+    firm_name VARCHAR(15),
+    writer_name VARCHAR(10),
+    price NUMERIC(5),
+    pages NUMERIC(5),
+    genre_name VARCHAR(10),
+    joint_number numeric(4),
+    PRIMARY KEY (book_name),
+    constraint bookConst1 FOREIGN KEY (ISBN) REFERENCES publication(ISBN),
+    constraint bookConst2 FOREIGN KEY (firm_name) REFERENCES publisher(firm_name),
+    constraint bookConst3 FOREIGN KEY (writer_name) REFERENCES writer(writer_name),
+    constraint bookConst4 FOREIGN KEY (genre_name) REFERENCES genre(genre_name)
+);
+
+create table customer(
+    customer_name varchar(15),
+    customer_id numeric(5, 0),
+    customer_address varchar(10),
+    customer_phoneNum varchar(15),
+    point numeric(5),
+    PRIMARY KEY (customer_id)
+);
+
+create table purchase_list
+(
+    customer_id numeric(5,0),
+    score NUMERIC(1, 0),
+    evaluation VARCHAR(4),
+    isbn varchar(10),
+   FOREIGN key (customer_id) REFERENCES customer(customer_id),
+    foreign key (isbn) references publication(ISBN)
+);
+
+create table enrolled_list
+(
+	isbn varchar(10),
+	writer_name varchar(10),
+	foreign key (isbn) references publication(isbn),
+	foreign key (writer_name) references writer(writer_name)
+);
