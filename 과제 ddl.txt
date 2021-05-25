@@ -19,16 +19,15 @@ create table writer(
     FOREIGN KEY (ISBN) REFERENCES publication(ISBN)
 );
 
-create table publisher
-(
-    firm_name VARCHAR(15),
-    firm_address VARCHAR(10),
-    firm_contact VARCHAR(10),
-    publication_date VARCHAR(15),
-    PRIMARY KEY (firm_name),
-    FOREIGN KEY (publication_date) REFERENCES publication(publication_date)
+create table customer(
+    customer_name varchar(15) not null,
+    customer_id numeric(5, 0) not null,
+    customer_address varchar(10) not null,
+    customer_phoneNum varchar(15) not null,
+    point numeric(5),
+    PRIMARY KEY (customer_id)
 );
-//두 가지 선택지. publication value를 출판 정보에서 가져오는 foreign key로 하느냐, 아니면 대다수의 책을 몇 개의 publication date에 종속되게 하느냐
+
 
 create table book
 (
